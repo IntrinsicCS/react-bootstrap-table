@@ -74,8 +74,8 @@ class ToolBar extends Component {
           if (responseType !== 'object' && checkVal !== true) {
             this.refs.notifier.notice(
               'error',
-              'Form validate errors, please checking!',
-              'Pressed ESC can cancel');
+              'Validation errors. Please check your values.',
+              'Press ESC to Cancel');
             isValid = false;
             validateState[column.field] = checkVal;
           } else if (responseType === 'object' && checkVal.isValid !== true) {
@@ -201,7 +201,7 @@ class ToolBar extends Component {
     if (this.props.enableInsert) {
       insertBtn = (
         <button type='button'
-          className='btn btn-info react-bs-table-add-btn'
+          className='btn btn-success react-bs-table-add-btn'
           data-toggle='modal'
           data-target={ '.' + this.modalClassName }>
           <i className='glyphicon glyphicon-plus'></i> { this.props.insertText }
@@ -212,7 +212,7 @@ class ToolBar extends Component {
     if (this.props.enableDelete) {
       deleteBtn = (
         <button type='button'
-          className='btn btn-warning react-bs-table-del-btn'
+          className='btn btn-danger react-bs-table-del-btn'
           data-toggle='tooltip'
           data-placement='right'
           title='Drop selected row'
@@ -251,10 +251,10 @@ class ToolBar extends Component {
       <div className='row'>
         <div className='col-xs-12 col-sm-6 col-md-6 col-lg-8'>
           <div className='btn-group btn-group-sm' role='group'>
-            { exportCSV }
             { insertBtn }
             { deleteBtn }
             { showSelectedOnlyBtn }
+            { exportCSV }
           </div>
         </div>
         <div className='col-xs-12 col-sm-6 col-md-6 col-lg-4'>

@@ -112,6 +112,7 @@ export default class App extends React.Component {
         trClassName={ trClassNameFormat }
         selectRow={ selectRowProp }
         cellEdit={ cellEditProp }
+          exportCSV={ true }
         options={ options }
         insertRow
         deleteRow
