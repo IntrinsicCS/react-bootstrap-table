@@ -342,7 +342,7 @@ class ToolBar extends Component {
         });
         var showing = (shakeEditor || (this.state.validateState != null) || this.state.isModalShowing);
         return (
-            <Modal show={showing} closeButton onHide={() => {
+            <Modal show={showing} onHide={() => {
                 this.setState({ isModalShowing: false, shakeEditor: false, validateState: null });
             }}>
                 <Modal.Header closeButton>
