@@ -2,7 +2,7 @@
   "name": "react-bootstrap-table",
   "version": "2.5.8",
   "description": "It's a react table for bootstrap",
-  "main": "./lib/index.js",
+  "main": "./src/index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/AllenFang/react-bootstrap-table.git"
@@ -20,7 +20,7 @@
   ],
   "files": [
     "README.md",
-    "lib/",
+    "src/",
     "dist/",
     "css/"
   ],
@@ -65,7 +65,6 @@
   },
   "dependencies": {
     "classnames": "^2.1.2",
-    "history": "^1.17.0",
     "react-toastr": "^2.8.0"
   },
   "peerDependencies": {
