@@ -67,6 +67,7 @@
   },
   "dependencies": {
     "classnames": "^2.1.2",
+    "react-bootstrap": "^0.29.5",
     "@allenfang/react-toastr": "2.8.2"
   },
   "peerDependencies": {
