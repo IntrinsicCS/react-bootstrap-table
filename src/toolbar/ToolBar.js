@@ -31,9 +31,21 @@ class ToolBar extends Component {
         );
     }
 
-    componentWillUnmount() {
-        this.clearTimeout();
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.reset) {
+      this.setSearchInput('');
     }
+  }
+
+  componentWillUnmount() {
+    this.clearTimeout();
+  }
+
+  setSearchInput(text) {
+    if (this.refs.seachInput.value !== text) {
+      this.refs.seachInput.value = text;
+    }
+  }
 
     clearTimeout() {
         if (this.timeouteClear) {
@@ -52,18 +64,18 @@ class ToolBar extends Component {
         let responseType;
         let tempValue;
 
-        this.props.columns.forEach(function (column, i) {
-            if (column.autoValue) {
-                // when you want same auto generate value and not allow edit, example ID field
-                const time = new Date().getTime();
-                tempValue = typeof column.autoValue === 'function' ?
-                    column.autoValue() :
-                    (`autovalue-${time}`);
-            } else if (column.hiddenOnInsert) {
-                tempValue = '';
-            } else {
-                const dom = this.refs[column.field + i];
-                tempValue = dom.value;
+    this.props.columns.forEach(function(column, i) {
+      if (column.autoValue) {
+        // when you want same auto generate value and not allow edit, example ID field
+        const time = new Date().getTime();
+        tempValue = typeof column.autoValue === 'function' ?
+          column.autoValue() :
+          (`autovalue-${time}`);
+      } else if (column.hiddenOnInsert || !column.field) {
+        tempValue = '';
+      } else {
+        const dom = this.refs[column.field + i];
+        tempValue = dom.value;
 
                 if (column.editable && column.editable.type === 'checkbox') {
                     const values = tempValue.split(':');
@@ -313,14 +325,14 @@ class ToolBar extends Component {
                 placeholder: editable.placeholder ? editable.placeholder : name
             };
 
-            if (autoValue || hiddenOnInsert) {
-                // when you want same auto generate value
-                // and not allow edit, for example ID field
-                return null;
-            }
-            const error = validateState[field] ?
-                (<span className='help-block bg-danger'>{ validateState[field] }</span>) :
-                null;
+      if (autoValue || hiddenOnInsert || !column.field) {
+        // when you want same auto generate value
+        // and not allow edit, for example ID field
+        return null;
+      }
+      const error = validateState[field] ?
+        (<span className='help-block bg-danger'>{ validateState[field] }</span>) :
+        null;
 
             // let editor = Editor(editable,attr,format);
             // if(editor.props.type && editor.props.type == 'checkbox'){
@@ -373,37 +385,39 @@ class ToolBar extends Component {
 }
 
 ToolBar.propTypes = {
-    onAddRow: PropTypes.func,
-    onDropRow: PropTypes.func,
-    onShowOnlySelected: PropTypes.func,
-    enableInsert: PropTypes.bool,
-    enableDelete: PropTypes.bool,
-    enableSearch: PropTypes.bool,
-    enableShowOnlySelected: PropTypes.bool,
-    columns: PropTypes.array,
-    searchPlaceholder: PropTypes.string,
-    exportCSVText: PropTypes.string,
-    insertText: PropTypes.string,
-    deleteText: PropTypes.string,
-    saveText: PropTypes.string,
-    closeText: PropTypes.string,
-    clearSearch: PropTypes.bool,
-    ignoreEditable: PropTypes.bool,
-    defaultSearch: PropTypes.string
+  onAddRow: PropTypes.func,
+  onDropRow: PropTypes.func,
+  onShowOnlySelected: PropTypes.func,
+  enableInsert: PropTypes.bool,
+  enableDelete: PropTypes.bool,
+  enableSearch: PropTypes.bool,
+  enableShowOnlySelected: PropTypes.bool,
+  columns: PropTypes.array,
+  searchPlaceholder: PropTypes.string,
+  exportCSVText: PropTypes.string,
+  insertText: PropTypes.string,
+  deleteText: PropTypes.string,
+  saveText: PropTypes.string,
+  closeText: PropTypes.string,
+  clearSearch: PropTypes.bool,
+  ignoreEditable: PropTypes.bool,
+  defaultSearch: PropTypes.string,
+  reset: PropTypes.bool
 };
 
 ToolBar.defaultProps = {
-    enableInsert: false,
-    enableDelete: false,
-    enableSearch: false,
-    enableShowOnlySelected: false,
-    clearSearch: false,
-    ignoreEditable: false,
-    exportCSVText: Const.EXPORT_CSV_TEXT,
-    insertText: Const.INSERT_BTN_TEXT,
-    deleteText: Const.DELETE_BTN_TEXT,
-    saveText: Const.SAVE_BTN_TEXT,
-    closeText: Const.CLOSE_BTN_TEXT
+  reset: false,
+  enableInsert: false,
+  enableDelete: false,
+  enableSearch: false,
+  enableShowOnlySelected: false,
+  clearSearch: false,
+  ignoreEditable: false,
+  exportCSVText: Const.EXPORT_CSV_TEXT,
+  insertText: Const.INSERT_BTN_TEXT,
+  deleteText: Const.DELETE_BTN_TEXT,
+  saveText: Const.SAVE_BTN_TEXT,
+  closeText: Const.CLOSE_BTN_TEXT
 };
 
 export default ToolBar;
