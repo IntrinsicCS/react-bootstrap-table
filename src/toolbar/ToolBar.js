@@ -416,13 +416,20 @@ class ToolBar extends Component {
       );
     }
 
-    return (
-      <Modal className='react-bs-insert-modal modal-dialog'
-        isOpen={ this.state.isInsertModalOpen }
-        onRequestClose={ this.handleModalClose }
-        contentLabel='Modal'>
-        { modal }
-      </Modal>
+  return (      
+         <Modal className='fade in modal'
+           isOpen={ this.state.isInsertModalOpen }
+           onRequestClose={ this.handleModalClose }
+      style={{
+    overlay : {   
+    backgroundColor   : 'rgba(0, 0, 0, 0.7)'
+  }
+  }}
+           contentLabel='Modal'>
+               <div className="react-bs-insert-modal modal-dialog">
+                    { modal }
+                </div>
+         </Modal>    
     );
   }
 

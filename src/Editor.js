@@ -1,5 +1,5 @@
 import React from 'react';
-
+import AutoComplete from './autocomplete';
 const editor = function(editable, attr, format, editorClass, defaultValue, ignoreEditable) {
   if (editable === true ||
     (editable === false && ignoreEditable) ||
@@ -96,7 +96,11 @@ const editor = function(editable, attr, format, editorClass, defaultValue, ignor
       return (
         <input { ...attr } type='datetime-local' defaultValue={ defaultValue }/>
       );
-    } else {// process other input type. as password,url,email...
+        } else if (editable.type === 'autoSuggest') {            
+            var attributes = Object.assign({},{...editable},{...attr});
+            attributes.className ="form-control editor edit-text";
+            return (<AutoComplete { ...attributes }  onUpdate={ editable.onUpdate }/>);              
+        } else {// process other input type. as password,url,email...
       return (
         <input { ...attr } type='text' defaultValue={ defaultValue }/>
       );

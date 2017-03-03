@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import Const from '../Const';
 
-const deleteBtnDefaultClass = 'react-bs-table-del-btn';
+const deleteBtnDefaultClass = 'btn-danger react-bs-table-del-btn';
 
 class DeleteButton extends Component {
   render() {

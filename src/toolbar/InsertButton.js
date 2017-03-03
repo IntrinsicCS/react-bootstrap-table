@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import Const from '../Const';
 
-const insertBtnDefaultClass = 'react-bs-table-add-btn';
+const insertBtnDefaultClass = 'btn-success react-bs-table-add-btn';
 
 class InsertButton extends Component {
   render() {
@@ -18,7 +18,7 @@ class InsertButton extends Component {
       (<span><i className={ `glyphicon ${btnGlyphicon}` }></i>{ btnText }</span>);
     return (
       <button type='button'
-        className={ `btn ${btnContextual} ${insertBtnDefaultClass} ${className}` }
+        className={ `btn ${insertBtnDefaultClass} ${className}` }
         onClick={ onClick }
         { ...rest }>
         { content }

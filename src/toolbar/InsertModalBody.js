@@ -5,9 +5,9 @@ import editor from '../Editor';
 
 class InsertModalBody extends Component {
 
-  getFieldValue() {
+    getFieldValue() {        
     const newRow = {};
-    this.props.columns.forEach((column, i) => {
+    this.props.columns.forEach((column, i) => {        
       let inputVal;
       if (column.autoValue) {
         // when you want same auto generate value and not allow edit, example ID field
@@ -20,6 +20,10 @@ class InsertModalBody extends Component {
       } else {
         const dom = this.refs[column.field + i];
         inputVal = dom.value;
+
+        if (column.editable && column.editable.type === 'autoSuggest') {          
+            inputVal = dom.state.value;
+        }
 
         if (column.editable && column.editable.type === 'checkbox') {
           const values = inputVal.split(':');
@@ -55,6 +59,7 @@ class InsertModalBody extends Component {
               // and not allow edit, for example ID field
               return null;
             }
+              
             const error = validateState[field] ?
               (<span className='help-block bg-danger'>{ validateState[field] }</span>) :
               null;
