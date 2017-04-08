@@ -11,8 +11,7 @@ if (Util.canUseDOM()) {
 
 function toString(data, keys) {
   let dataString = '';
-  if (data.length === 0) return dataString;
-
+  
   const headCells = [];
   let rowCount = 0;
   keys.forEach(key => {
