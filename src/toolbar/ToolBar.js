@@ -412,16 +412,18 @@ class ToolBar extends Component {
           onSave={ this.handleSaveBtnClick }
           headerComponent={ insertModalHeader }
           bodyComponent={ insertModalBody }
-          footerComponent={ insertModalFooter }/>
+          footerComponent={ insertModalFooter }
+          title={this.props.insertText || 'Add Row'}
+        />
       );
     }
 
-  return (      
+  return (
          <Modal className='fade in modal'
            isOpen={ this.state.isInsertModalOpen }
            onRequestClose={ this.handleModalClose }
       style={{
-    overlay : {   
+    overlay : {
     backgroundColor   : 'rgba(0, 0, 0, 0.7)'
   }
   }}
@@ -429,7 +431,7 @@ class ToolBar extends Component {
                <div className="react-bs-insert-modal modal-dialog">
                     { modal }
                 </div>
-         </Modal>    
+         </Modal>
     );
   }
 

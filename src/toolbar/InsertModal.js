@@ -26,7 +26,8 @@ export default class InsertModal extends Component {
       columns,
       validateState,
       ignoreEditable,
-      onModalClose
+      onModalClose,
+      title
     } = this.props;
     const bodyAttr = { columns, validateState, ignoreEditable };
 
@@ -74,6 +75,7 @@ export default class InsertModal extends Component {
           headerComponent ||
           (<InsertModalHeader
             className='react-bs-table-inser-modal-header'
+            title={title||'Add Row'}
             onModalClose={ onModalClose }/>)
         }
         {
