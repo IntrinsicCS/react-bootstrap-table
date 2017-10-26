@@ -309,14 +309,14 @@ class TableBody extends Component {
     rowIndex--;
 
     if (action === 'tab') {
-      this.handleCompleteEditCell(e.target.value, rowIndex, columnIndex - 1);
+      /* this.handleCompleteEditCell(e.target.value, rowIndex, columnIndex - 1);
       if (columnIndex >= this.props.columns.length) {
         rowIndex = rowIndex + 1;
         columnIndex = 1;
         this.handleCellKeyDown(e, true);
       } else {
         this.handleCellKeyDown(e);
-      }
+      } */
     }
 
     const stateObj = {
