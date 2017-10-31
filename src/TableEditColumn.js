@@ -16,7 +16,7 @@ class TableEditColumn extends Component {
     };
   }
 
-  handleKeyPress = e => {
+  handleKeyPress = e => {    
     if (e.keyCode === 13) {
       // Pressed ENTER
       const value = e.currentTarget.type === 'checkbox' ?
@@ -30,7 +30,7 @@ class TableEditColumn extends Component {
       this.props.completeEdit(
         null, this.props.rowIndex, this.props.colIndex);
     } else if (e.keyCode === 9) {
-      this.props.onTab(this.props.rowIndex + 1, this.props.colIndex + 1, 'tab', e);
+      this.props.onTab(this.props.rowIndex + 1, this.props.colIndex + 1, 'tab', e);      
       e.preventDefault();
     } else if (e.type === 'click' && !this.props.blurToSave) {  // textarea click save button
       const value = e.target.parentElement.firstChild.value;
@@ -205,7 +205,7 @@ class TableEditColumn extends Component {
     );
   }
 
-  _getCheckBoxValue(e) {
+  _getCheckBoxValue(e) {    
     let value = '';
     const values = e.currentTarget.value.split(':');
     value = e.currentTarget.checked ? values[0] : values[1];

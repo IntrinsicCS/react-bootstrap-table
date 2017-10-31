@@ -6,6 +6,7 @@ import TableColumn from './TableColumn';
 import TableEditColumn from './TableEditColumn';
 import classSet from 'classnames';
 import ExpandComponent from './ExpandComponent';
+import _ from 'underscore';
 
 const isFun = function(obj) {
   return obj && (typeof obj === 'function');
@@ -217,7 +218,7 @@ class TableBody extends Component {
       const enterToEdit = typeof keyBoardNav === 'object' ?
         keyBoardNav.enterToEdit :
         false;
-      if (cellEdit && enterToEdit) {
+      if (cellEdit && enterToEdit) {                
         this.handleEditCell(e.target.parentElement.rowIndex + 1,
           e.currentTarget.cellIndex, '', e);
       }
@@ -308,15 +309,23 @@ class TableBody extends Component {
     }
     rowIndex--;
 
-    if (action === 'tab') {
-      /* this.handleCompleteEditCell(e.target.value, rowIndex, columnIndex - 1);
-      if (columnIndex >= this.props.columns.length) {
+    if (action === 'tab') {          
+      const value = e.target.type === 'checkbox' ?
+                      this._getCheckBoxValue(e) : e.target.value;
+      this.handleCompleteEditCell(value, rowIndex, columnIndex);
+      
+      let visibleColumns = _.where(this.props.columns,{"hidden":false});
+      if (columnIndex >= visibleColumns.length) {
         rowIndex = rowIndex + 1;
-        columnIndex = 1;
+
+        let firstEditableColumn = _.find(this.props.columns,function(column){return column.hidden!==true && column.editable!==false;});
+        columnIndex = firstEditableColumn.index;
+
         this.handleCellKeyDown(e, true);
       } else {
+        columnIndex += 1;
         this.handleCellKeyDown(e);
-      } */
+      } 
     }
 
     const stateObj = {
@@ -336,9 +345,9 @@ class TableBody extends Component {
   }
 
   handleCompleteEditCell = (newVal, rowIndex, columnIndex) => {
-    this.setState({ currEditCell: null });
+    this.setState({ currEditCell: null });    
     if (newVal !== null) {
-      this.props.cellEdit.__onCompleteEdit__(newVal, rowIndex, columnIndex);
+      this.props.cellEdit.__onCompleteEdit__(newVal, rowIndex, columnIndex);      
     }
   }
 
@@ -378,6 +387,13 @@ class TableBody extends Component {
 
   getHeaderColGrouop = () => {
     return this.refs.header.childNodes;
+  }
+
+  _getCheckBoxValue(e) {    
+    let value = '';
+    const values = e.target.value.split(':');
+    value = e.target.checked ? values[0] : values[1];
+    return value;
   }
 }
 TableBody.propTypes = {

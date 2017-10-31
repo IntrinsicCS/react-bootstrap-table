@@ -33,7 +33,7 @@ class AutoComplete extends React.Component {
             value: newValue
         });
     };
-        onBlur = (event, { focusedSuggestion }) => {            
+        onBlur = (event, { focusedSuggestion }) => {                        
             this.updateData();
         };
 

@@ -87,7 +87,7 @@ const editor = function(editable, attr, format, editorClass, defaultValue, ignor
 
       const checked = defaultValue &&
         defaultValue.toString() === values.split(':')[0] ? true : false;
-
+      console.log(checked);
       return (
         <input { ...attr } type='checkbox'
           value={ values } defaultChecked={ checked }/>
