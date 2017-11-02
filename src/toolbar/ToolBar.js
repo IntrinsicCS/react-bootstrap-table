@@ -77,7 +77,7 @@ class ToolBar extends Component {
         if (responseType !== 'object' && tempMsg !== true) {
           this.refs.notifier.notice(
               'error',
-              'Form validate errors, please checking!',
+              'Form validation error. Please correct the error.',
               'Pressed ESC can cancel');
           isValid = false;
           validateState[column.field] = tempMsg;
