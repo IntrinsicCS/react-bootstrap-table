@@ -30,6 +30,9 @@ class TableEditColumn extends Component {
       this.props.completeEdit(
         null, this.props.rowIndex, this.props.colIndex);
     } else if (e.keyCode === 9) {
+      if (!this.validator(value)) {
+        return;
+      }      
       this.props.onTab(this.props.rowIndex + 1, this.props.colIndex + 1, 'tab', e);      
       e.preventDefault();
     } else if (e.type === 'click' && !this.props.blurToSave) {  // textarea click save button
@@ -233,6 +236,5 @@ TableEditColumn.propTypes = {
   isFocus: PropTypes.bool,
   customStyleWithNav: PropTypes.oneOfType([ PropTypes.func, PropTypes.object ])
 };
-
 
 export default TableEditColumn;
