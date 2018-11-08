@@ -16,24 +16,22 @@ class TableEditColumn extends Component {
     };
   }
 
-  handleKeyPress = e => {    
+  handleKeyPress = e => {
     if (e.keyCode === 13) {
       // Pressed ENTER
-      const value = e.currentTarget.type === 'checkbox' ?
-                      this._getCheckBoxValue(e) : e.currentTarget.value;
-
+      const value = e.currentTarget.type === 'checkbox' ? this._getCheckBoxValue(e) : e.currentTarget.value;
       if (!this.validator(value)) {
         return;
       }
       this.props.completeEdit(value, this.props.rowIndex, this.props.colIndex);
     } else if (e.keyCode === 27) {
-      this.props.completeEdit(
-        null, this.props.rowIndex, this.props.colIndex);
+      this.props.completeEdit(null, this.props.rowIndex, this.props.colIndex);
     } else if (e.keyCode === 9) {
+      const value = e.currentTarget.type === 'checkbox' ? this._getCheckBoxValue(e) : e.currentTarget.value;
       if (!this.validator(value)) {
         return;
-      }      
-      this.props.onTab(this.props.rowIndex + 1, this.props.colIndex + 1, 'tab', e);      
+      }
+      this.props.onTab(this.props.rowIndex + 1, this.props.colIndex + 1, 'tab', e);
       e.preventDefault();
     } else if (e.type === 'click' && !this.props.blurToSave) {  // textarea click save button
       const value = e.target.parentElement.firstChild.value;
@@ -41,7 +39,7 @@ class TableEditColumn extends Component {
         return;
       }
       this.props.completeEdit(
-          value, this.props.rowIndex, this.props.colIndex);
+        value, this.props.rowIndex, this.props.colIndex);
     }
   }
 
@@ -49,12 +47,12 @@ class TableEditColumn extends Component {
     e.stopPropagation();
     if (this.props.blurToSave) {
       const value = e.currentTarget.type === 'checkbox' ?
-                      this._getCheckBoxValue(e) : e.currentTarget.value;
+        this._getCheckBoxValue(e) : e.currentTarget.value;
       if (!this.validator(value)) {
         return;
       }
       this.props.completeEdit(
-          value, this.props.rowIndex, this.props.colIndex);
+        value, this.props.rowIndex, this.props.colIndex);
     }
   }
 
@@ -85,12 +83,12 @@ class TableEditColumn extends Component {
         valid = false;
         const toastr = this.props.beforeShowError &&
           this.props.beforeShowError(checkVal.notification.type,
-                                     checkVal.notification.msg,
-                                     checkVal.notification.title);
+            checkVal.notification.msg,
+            checkVal.notification.title);
         if (toastr) {
           ts.refs.notifier.notice(checkVal.notification.type,
-                                  checkVal.notification.msg,
-                                  checkVal.notification.title);
+            checkVal.notification.msg,
+            checkVal.notification.title);
         }
       }
       if (!valid) {
@@ -199,16 +197,16 @@ class TableEditColumn extends Component {
 
     return (
       <td ref='td'
-        style={ style }
-        className={ className }
-        onClick={ this.handleClick }>
-        { cellEditor }
-        <Notifier ref='notifier'/>
+        style={style}
+        className={className}
+        onClick={this.handleClick}>
+        {cellEditor}
+        <Notifier ref='notifier' />
       </td>
     );
   }
 
-  _getCheckBoxValue(e) {    
+  _getCheckBoxValue(e) {
     let value = '';
     const values = e.currentTarget.value.split(':');
     value = e.currentTarget.checked ? values[0] : values[1];
@@ -221,8 +219,8 @@ TableEditColumn.propTypes = {
   rowIndex: PropTypes.number,
   colIndex: PropTypes.number,
   blurToSave: PropTypes.bool,
-  editable: PropTypes.oneOfType([ PropTypes.bool, PropTypes.object ]),
-  format: PropTypes.oneOfType([ PropTypes.bool, PropTypes.func ]),
+  editable: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
+  format: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
   row: PropTypes.any,
   fieldValue: PropTypes.oneOfType([
     PropTypes.string,
@@ -234,7 +232,7 @@ TableEditColumn.propTypes = {
   className: PropTypes.any,
   beforeShowError: PropTypes.func,
   isFocus: PropTypes.bool,
-  customStyleWithNav: PropTypes.oneOfType([ PropTypes.func, PropTypes.object ])
+  customStyleWithNav: PropTypes.oneOfType([PropTypes.func, PropTypes.object])
 };
 
 export default TableEditColumn;
